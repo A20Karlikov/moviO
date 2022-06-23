@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">moviO</string>
+    <string name="main_activity_title">moviO</string>
 </resources>

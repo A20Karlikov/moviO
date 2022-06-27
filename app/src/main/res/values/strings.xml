@@ -1,14 +1,9 @@
 <resources>
     <string name="app_name">moviO</string>
     <string name="main_activity_title">moviO</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="overview_text">Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.</string>
-    <string name="movie_name_text">Movie name</string>
     <string name="year_text">Year</string>
-    <string name="movie_year_text">Movie year</string>
     <string name="cast_text">Cast</string>
-    <string name="movie_cast_text">Movie Cast</string>
     <string name="overview_label_text">Overview</string>
     <string name="genre_text">Genre</string>
-    <string name="movie_genre_text">Movie Genre</string>
+
 </resources>

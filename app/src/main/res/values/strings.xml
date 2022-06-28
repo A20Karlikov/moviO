@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">moviO</string>
     <string name="main_activity_title">moviO</string>
+    <string name="year_text">Year</string>
+    <string name="cast_text">Cast</string>
+    <string name="overview_label_text">Overview</string>
+    <string name="genre_text">Genre</string>
+
 </resources>

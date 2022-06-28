@@ -7,7 +7,7 @@ import com.io.moviO.databinding.FragmentMovieDetailsBinding
 
 private const val ARG_MOVIE = "movie"
 
-class MovieDetailsFragment() : Fragment(R.layout.fragment_movie_details){
+class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     private lateinit var binding: FragmentMovieDetailsBinding
 
@@ -15,11 +15,10 @@ class MovieDetailsFragment() : Fragment(R.layout.fragment_movie_details){
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMovieDetailsBinding.bind(view)
 
-        val movie = requireArguments().getParcelable<Movie>(ARG_MOVIE)
-        if (movie != null)  fillMovieDetails(movie)
+        requireArguments().getParcelable<Movie>(ARG_MOVIE)?.let { fillMovieDetails(it) }
     }
 
-    private fun fillMovieDetails(movie: Movie){
+    private fun fillMovieDetails(movie: Movie) {
         binding.apply {
             movieName.text = movie.name
             moviePoster.setBackgroundResource(movie.poster)
@@ -31,12 +30,8 @@ class MovieDetailsFragment() : Fragment(R.layout.fragment_movie_details){
     }
 
     companion object {
-        fun newInstance(movie: Movie): MovieDetailsFragment {
-            val createdMovieDetailsFragment = MovieDetailsFragment()
-            val bundle = Bundle()
-            bundle.putParcelable(ARG_MOVIE, movie)
-            createdMovieDetailsFragment.arguments = bundle
-            return createdMovieDetailsFragment
+        fun newInstance(movie: Movie): MovieDetailsFragment = MovieDetailsFragment().also {
+            it.arguments = Bundle().apply { putParcelable(ARG_MOVIE, movie) }
         }
     }
 }

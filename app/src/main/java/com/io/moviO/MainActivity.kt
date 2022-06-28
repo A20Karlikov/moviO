@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val tr = supportFragmentManager.beginTransaction()
-        tr.replace(R.id.fragment_container, MoviesListFragment())
-        tr.commit()
+        supportFragmentManager.beginTransaction()
+        .replace(R.id.fragment_container, MoviesListFragment())
+        .commit()
     }
 }

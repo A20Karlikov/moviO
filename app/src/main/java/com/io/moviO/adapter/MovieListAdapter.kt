@@ -6,7 +6,7 @@ import com.io.moviO.Movie
 import com.io.moviO.databinding.ListItemBinding
 
 class MovieListAdapter(
-    private val listener: SelectListener,
+    private val listener: OnMovieClickedListener,
     private val movies: List<Movie>
 ) : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
@@ -20,7 +20,7 @@ class MovieListAdapter(
 
     class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: Movie, listener: SelectListener) {
+        fun bind(movie: Movie, listener: OnMovieClickedListener) {
             binding.movieNameMovieListTv.text = movie.name
             binding.moviePosterMovieListIv.setImageResource(movie.poster)
             binding.root.setOnClickListener {
@@ -29,7 +29,7 @@ class MovieListAdapter(
         }
     }
 
-    interface SelectListener {
+    interface OnMovieClickedListener {
         fun onItemClicked(movie: Movie)
     }
 }

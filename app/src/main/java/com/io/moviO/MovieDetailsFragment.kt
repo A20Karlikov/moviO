@@ -1,8 +1,8 @@
 package com.io.moviO
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.io.moviO.databinding.FragmentMovieDetailsBinding
@@ -29,20 +29,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
             }
         })
 
-
-   //     requireArguments().getParcelable<Movie>(ARG_MOVIE)?.let { fillMovieDetails(it) }
     }
-
-//    private fun fillMovieDetails(movie: Movie) {
-//        binding.apply {
-//            movieName.text = movie.name
-//            moviePoster.setBackgroundResource(movie.poster)
-//            movieYear.text = movie.year
-//            movieGenre.text = movie.gerne
-//            movieCast.text = movie.cast
-//            overviewText.text = movie.overview
-//        }
-//    }
 
     companion object {
         fun newInstance(movie: Movie): MovieDetailsFragment = MovieDetailsFragment().also {

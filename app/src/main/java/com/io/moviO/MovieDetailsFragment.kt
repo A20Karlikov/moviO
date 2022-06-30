@@ -3,7 +3,6 @@ package com.io.moviO
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.io.moviO.databinding.FragmentMovieDetailsBinding
 
@@ -17,8 +16,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMovieDetailsBinding.bind(view)
-        requireArguments().getParcelable<Movie>(ARG_MOVIE)?.let { viewModel.createMovie(it) }
-        viewModel.getMovie().observe(viewLifecycleOwner, Observer {
+        requireArguments().getParcelable<Movie>(ARG_MOVIE)?.let {
             binding.apply {
                 movieName.text = it.name
                 moviePoster.setBackgroundResource(it.poster)
@@ -27,8 +25,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
                 movieCast.text = it.cast
                 overviewText.text = it.overview
             }
-        })
-
+        }
     }
 
     companion object {

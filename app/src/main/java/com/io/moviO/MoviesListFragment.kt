@@ -1,25 +1,24 @@
 package com.io.moviO
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.io.moviO.adapter.MovieListAdapter
 import com.io.moviO.databinding.FragmentMoviesListBinding
 
-class MoviesListFragment : Fragment(R.layout.fragment_movies_list), MovieListAdapter.OnMovieClickedListener, LifecycleOwner {
-    private lateinit var binding : FragmentMoviesListBinding
-    val viewModel:MoviesListViewModel by lazy { ViewModelProvider(this).get(MoviesListViewModel::class.java)}
+class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
+    MovieListAdapter.OnMovieClickedListener {
+    private lateinit var binding: FragmentMoviesListBinding
+    val viewModel: MoviesListViewModel by lazy { ViewModelProvider(this).get(MoviesListViewModel::class.java) }
     private var apadter = MovieListAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getMovies().observe(viewLifecycleOwner) {
+        viewModel.movies.observe(viewLifecycleOwner) {
             apadter.updateMovieList(it)
         }
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 class MoviesListViewModel : ViewModel() {
 
     private var _movies = MutableLiveData<List<Movie>>()
+    val movies: LiveData<List<Movie>> = _movies
 
     init {
         _movies.value  = listOf(
@@ -21,7 +22,5 @@ class MoviesListViewModel : ViewModel() {
             Movie("Movie 9", R.drawable.ic_launcher_background, "2008", "Drama", "Cast Crew", "Overview"),
             Movie("Movie 10", R.drawable.ic_launcher_background, "2009", "Comedy", "Cast Crew", "Overview"))
     }
-
-    fun getMovies(): LiveData<List<Movie>> = _movies
 
 }

@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.io.moviO.R
 import com.io.moviO.databinding.FragmentMovieDetailsBinding
 
-private const val ARG_MOVIE = "movie"
+private const val ARG_MOVIE_ID = "movie_id"
 
 class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
@@ -18,7 +18,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMovieDetailsBinding.bind(view)
-        requireArguments().getString(ARG_MOVIE)?.let { viewModel.setMovie(it) }
+        requireArguments().getString(ARG_MOVIE_ID)?.let { viewModel.getMovieById(it) }
         viewModel.movie.observe(viewLifecycleOwner, Observer {
             binding.apply {
                 movieName.text = it.name
@@ -33,7 +33,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     companion object {
         fun newInstance(id: String): MovieDetailsFragment = MovieDetailsFragment().also {
-            it.arguments = Bundle().apply { putString(ARG_MOVIE, id) }
+            it.arguments = Bundle().apply { putString(ARG_MOVIE_ID, id) }
         }
     }
 }

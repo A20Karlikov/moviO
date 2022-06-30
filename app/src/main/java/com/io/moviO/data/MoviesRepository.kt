@@ -7,12 +7,11 @@ object MoviesRepository {
     private var moviesData = mutableListOf<Movie>()
 
     fun getMovies(): List<Movie> {
-        setMovies()
         return moviesData
     }
 
-    private fun setMovies() {
-        moviesData = listOf(
+    init {
+        moviesData = mutableListOf(
             Movie(
                 "1",
                 "Movie 1",
@@ -103,6 +102,6 @@ object MoviesRepository {
                 "Cast Crew",
                 "Overview"
             )
-        ) as MutableList<Movie>
+        )
     }
 }

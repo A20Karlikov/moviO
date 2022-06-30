@@ -13,7 +13,7 @@ class MovieDetailsViewModel : ViewModel() {
 
     private val useCase = GetMovieByIdUseCase()
 
-    fun setMovie(id: String) {
+    fun getMovieById(id: String) {
         _movie.value = useCase.getMovieById(id)
     }
 }

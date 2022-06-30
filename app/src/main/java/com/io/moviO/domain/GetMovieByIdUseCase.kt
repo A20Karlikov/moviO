@@ -7,8 +7,5 @@ class GetMovieByIdUseCase {
 
     private val moviesRepo = MoviesRepository
 
-    fun getMovieById(id: String): Movie {
-        val movie = moviesRepo.getMovies().find { movie -> movie.id == id }
-        return movie!!
-    }
+    fun getMovieById(id: String): Movie = moviesRepo.getMovies().first { movie -> movie.id == id }
 }

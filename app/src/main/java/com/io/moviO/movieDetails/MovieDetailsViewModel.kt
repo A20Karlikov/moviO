@@ -3,8 +3,12 @@ package com.io.moviO.movieDetails
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.io.moviO.data.Movie
 import com.io.moviO.domain.GetMovieByIdUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MovieDetailsViewModel : ViewModel() {
 
@@ -14,6 +18,11 @@ class MovieDetailsViewModel : ViewModel() {
     private val useCase = GetMovieByIdUseCase()
 
     fun getMovieById(id: String) {
-        _movie.value = useCase.getMovieById(id)
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = useCase.getMovieById(id)
+            withContext(Dispatchers.Main) {
+                _movie.value = result
+            }
+        }
     }
 }

@@ -7,5 +7,6 @@ class GetMovieByIdUseCase {
 
     private val moviesRepo = MoviesRepository
 
-    fun getMovieById(id: String): Movie = moviesRepo.getMovies().first { movie -> movie.id == id }
+    suspend fun getMovieById(id: String): Movie =
+        moviesRepo.getMovies().first { movie -> movie.id == id }
 }

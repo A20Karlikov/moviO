@@ -6,6 +6,5 @@ import com.io.moviO.data.MoviesRepository
 class GetMoviesUseCase {
     private val moviesRepo = MoviesRepository
 
-    fun getMovies(): List<Movie> = moviesRepo.getMovies()
-
+    suspend fun getMovies(): List<Movie> = moviesRepo.getMovies()
 }

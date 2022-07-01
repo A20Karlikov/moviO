@@ -1,6 +1,8 @@
 package com.io.moviO.data
 
 import com.io.moviO.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 object MoviesRepository {
 
@@ -97,8 +99,6 @@ object MoviesRepository {
         )
     )
 
-    fun getMovies(): List<Movie> {
-        return moviesData
-    }
-
+    suspend fun getMovies(): List<Movie> =
+        withContext(Dispatchers.IO) { moviesData }
 }

@@ -99,6 +99,5 @@ object MoviesRepository {
         )
     )
 
-    suspend fun getMovies(): List<Movie> =
-        withContext(Dispatchers.IO) { moviesData }
+    suspend fun getMovies(): List<Movie> = withContext(Dispatchers.IO) { moviesData }
 }

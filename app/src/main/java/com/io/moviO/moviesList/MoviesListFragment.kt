@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.io.moviO.R
+import com.io.moviO.data.DataResult
 import com.io.moviO.databinding.FragmentMoviesListBinding
 import com.io.moviO.movieDetails.MovieDetailsFragment
 
@@ -20,7 +22,14 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
 
         super.onViewCreated(view, savedInstanceState)
         viewModel.movies.observe(viewLifecycleOwner) {
-            apadter.updateMovieList(it)
+            when (it) {
+                is DataResult.Success -> apadter.updateMovieList(it.value)
+                is DataResult.Fail -> Toast.makeText(
+                    this.context,
+                    "Something goes wrong!",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
         binding = FragmentMoviesListBinding.bind(view)
@@ -30,7 +39,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) =  inflater.inflate(R.layout.fragment_movies_list, container, false)
+    ) = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
 
     override fun onItemClicked(id: String) {

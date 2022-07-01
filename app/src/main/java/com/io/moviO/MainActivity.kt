@@ -1,9 +1,9 @@
 package com.io.moviO
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.io.moviO.databinding.ActivityMainBinding
+import com.io.moviO.moviesList.MoviesListFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

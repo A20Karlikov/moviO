@@ -1,8 +1,8 @@
-package com.io.moviO.adapter
+package com.io.moviO.moviesList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.io.moviO.Movie
+import com.io.moviO.data.Movie
 import com.io.moviO.databinding.ListItemBinding
 
 class MovieListAdapter(
@@ -25,7 +25,7 @@ class MovieListAdapter(
             binding.movieNameMovieListTv.text = movie.name
             binding.moviePosterMovieListIv.setImageResource(movie.poster)
             binding.root.setOnClickListener {
-                listener.onItemClicked(movie)
+                listener.onItemClicked(movie.id)
             }
         }
     }
@@ -37,6 +37,6 @@ class MovieListAdapter(
     }
 
     interface OnMovieClickedListener {
-        fun onItemClicked(movie: Movie)
+        fun onItemClicked(id: String)
     }
 }

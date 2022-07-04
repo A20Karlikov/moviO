@@ -24,16 +24,16 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         requireArguments().getString(ARG_MOVIE_ID)?.let { viewModel.getMovieById(it) }
         viewModel.movie.observe(viewLifecycleOwner, Observer {
             when (it) {
-                is DataResult.Success -> {
+                is DataResult.Success ->
                     binding.apply {
                         movieName.text = it.value.name
                         movieYear.text = it.value.year
                         movieGenre.text = it.value.gerne
                         movieCast.text = it.value.cast
                         overviewText.text = it.value.overview
+                        Glide.with(this@MovieDetailsFragment).load(it.value.poster)
+                            .into(moviePoster)
                     }
-                    Glide.with(this).load(it.value.poster).into(binding.moviePoster)
-                }
                 is DataResult.Fail -> Toast.makeText(
                     this.context,
                     R.string.error_message,

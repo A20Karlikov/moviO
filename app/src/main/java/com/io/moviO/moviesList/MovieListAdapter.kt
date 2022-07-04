@@ -1,4 +1,5 @@
 package com.io.moviO.moviesList
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -23,12 +24,14 @@ class MovieListAdapter(
     class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: Movie, listener: OnMovieClickedListener) {
-            binding.movieNameMovieListTv.text = movie.name
+            binding.apply {
+                movieNameMovieListTv.text = movie.name
 
-            Glide.with(this.itemView).load(movie.poster).into(binding.moviePosterMovieListIv)
+                Glide.with(this.root).load(movie.poster).into(moviePosterMovieListIv)
 
-            binding.root.setOnClickListener {
-                listener.onItemClicked(movie.id)
+                root.setOnClickListener {
+                    listener.onItemClicked(movie.id)
+                }
             }
         }
     }

@@ -1,7 +1,9 @@
 package com.io.moviO.moviesList
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.io.moviO.data.Movie
 import com.io.moviO.databinding.ListItemBinding
 
@@ -22,10 +24,14 @@ class MovieListAdapter(
     class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: Movie, listener: OnMovieClickedListener) {
-            binding.movieNameMovieListTv.text = movie.name
-            binding.moviePosterMovieListIv.setImageResource(movie.poster)
-            binding.root.setOnClickListener {
-                listener.onItemClicked(movie.id)
+            binding.apply {
+                movieNameMovieListTv.text = movie.name
+
+                Glide.with(this.root).load(movie.poster).into(moviePosterMovieListIv)
+
+                root.setOnClickListener {
+                    listener.onItemClicked(movie.id)
+                }
             }
         }
     }

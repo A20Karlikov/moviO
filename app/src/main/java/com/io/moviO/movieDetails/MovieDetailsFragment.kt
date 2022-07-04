@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.io.moviO.R
 import com.io.moviO.data.DataResult
 import com.io.moviO.databinding.FragmentMovieDetailsBinding
@@ -26,11 +27,12 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
                 is DataResult.Success ->
                     binding.apply {
                         movieName.text = it.value.name
-                        moviePoster.setBackgroundResource(it.value.poster)
                         movieYear.text = it.value.year
                         movieGenre.text = it.value.gerne
                         movieCast.text = it.value.cast
                         overviewText.text = it.value.overview
+                        Glide.with(this@MovieDetailsFragment).load(it.value.poster)
+                            .into(moviePoster)
                     }
                 is DataResult.Fail -> Toast.makeText(
                     this.context,

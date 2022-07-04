@@ -2,6 +2,7 @@ package com.io.moviO.moviesList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.io.moviO.data.Movie
 import com.io.moviO.databinding.ListItemBinding
 
@@ -23,7 +24,9 @@ class MovieListAdapter(
 
         fun bind(movie: Movie, listener: OnMovieClickedListener) {
             binding.movieNameMovieListTv.text = movie.name
-            binding.moviePosterMovieListIv.setImageResource(movie.poster)
+
+            Glide.with(this.itemView).load(movie.poster).into(binding.moviePosterMovieListIv)
+
             binding.root.setOnClickListener {
                 listener.onItemClicked(movie.id)
             }

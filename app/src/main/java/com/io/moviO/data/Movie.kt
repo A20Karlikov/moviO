@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class Movie(
     val id: String,
     val name: String,
-    val poster: Int,
+    val poster: String,
     val year: String,
     val gerne: String,
     val cast: String,

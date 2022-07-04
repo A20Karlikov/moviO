@@ -2,10 +2,12 @@ package com.io.moviO.movieDetails
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.io.moviO.R
+import com.io.moviO.data.DataResult
 import com.io.moviO.databinding.FragmentMovieDetailsBinding
 
 private const val ARG_MOVIE_ID = "movie_id"
@@ -20,13 +22,21 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         binding = FragmentMovieDetailsBinding.bind(view)
         requireArguments().getString(ARG_MOVIE_ID)?.let { viewModel.getMovieById(it) }
         viewModel.movie.observe(viewLifecycleOwner, Observer {
-            binding.apply {
-                movieName.text = it.name
-                moviePoster.setBackgroundResource(it.poster)
-                movieYear.text = it.year
-                movieGenre.text = it.gerne
-                movieCast.text = it.cast
-                overviewText.text = it.overview
+            when (it) {
+                is DataResult.Success ->
+                    binding.apply {
+                        movieName.text = it.value.name
+                        moviePoster.setBackgroundResource(it.value.poster)
+                        movieYear.text = it.value.year
+                        movieGenre.text = it.value.gerne
+                        movieCast.text = it.value.cast
+                        overviewText.text = it.value.overview
+                    }
+                is DataResult.Fail -> Toast.makeText(
+                    this.context,
+                    R.string.error_message,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }

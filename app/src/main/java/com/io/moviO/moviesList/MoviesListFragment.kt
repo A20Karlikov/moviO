@@ -26,7 +26,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
                 is DataResult.Success -> apadter.updateMovieList(it.value)
                 is DataResult.Fail -> Toast.makeText(
                     this.context,
-                    "Something goes wrong!",
+                    R.string.error_message,
                     Toast.LENGTH_LONG
                 ).show()
             }

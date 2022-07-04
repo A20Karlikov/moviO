@@ -7,9 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.io.moviO.data.DataResult
 import com.io.moviO.data.Movie
 import com.io.moviO.domain.GetMovieByIdUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MovieDetailsViewModel : ViewModel() {
 
@@ -19,11 +17,9 @@ class MovieDetailsViewModel : ViewModel() {
     private val useCase = GetMovieByIdUseCase()
 
     fun getMovieById(id: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             val result = useCase.execute(id)
-            withContext(Dispatchers.Main) {
-                _movie.value = result
-            }
+            _movie.value = result
         }
     }
 }

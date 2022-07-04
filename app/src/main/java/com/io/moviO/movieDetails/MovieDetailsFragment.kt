@@ -34,7 +34,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
                     }
                 is DataResult.Fail -> Toast.makeText(
                     this.context,
-                    "Something goes wrong!",
+                    R.string.error_message,
                     Toast.LENGTH_SHORT
                 ).show()
             }

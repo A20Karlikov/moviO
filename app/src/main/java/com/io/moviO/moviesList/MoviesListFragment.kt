@@ -42,7 +42,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
     ) = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
 
-    override fun onItemClicked(id: String) {
+    override fun onItemClicked(id: Int) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, MovieDetailsFragment.newInstance(id))
             .addToBackStack(this::class.java.name)

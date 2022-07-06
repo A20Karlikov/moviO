@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.io.moviO.data.Movie
+import com.io.moviO.common.Constants
+import com.io.moviO.data.modelMovieList.MovieForList
 import com.io.moviO.databinding.ListItemBinding
 
 class MovieListAdapter(
     private val listener: OnMovieClickedListener,
 ) : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
-    private val newMovies = mutableListOf<Movie>()
+    private val newMovies = mutableListOf<MovieForList>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -23,11 +24,13 @@ class MovieListAdapter(
 
     class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: Movie, listener: OnMovieClickedListener) {
+        fun bind(movie: MovieForList, listener: OnMovieClickedListener) {
             binding.apply {
-                movieNameMovieListTv.text = movie.name
+                movieNameMovieListTv.text = movie.title
 
-                Glide.with(this.root).load(movie.poster).into(moviePosterMovieListIv)
+                Glide.with(this.root)
+                    .load("${Constants.IMAGE_URL_START_PART}${movie.imageUrl}")
+                    .into(moviePosterMovieListIv)
 
                 root.setOnClickListener {
                     listener.onItemClicked(movie.id)
@@ -36,13 +39,13 @@ class MovieListAdapter(
         }
     }
 
-    fun updateMovieList(movies: List<Movie>) {
+    fun updateMovieList(movies: List<MovieForList>) {
         newMovies.clear()
         newMovies.addAll(movies)
         notifyDataSetChanged()
     }
 
     interface OnMovieClickedListener {
-        fun onItemClicked(id: String)
+        fun onItemClicked(id: Int)
     }
 }

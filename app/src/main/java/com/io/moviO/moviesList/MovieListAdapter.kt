@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.io.moviO.common.Constants
-import com.io.moviO.data.modelMovieList.MovieForList
+import com.io.moviO.data.modelMovie.Movie
 import com.io.moviO.databinding.ListItemBinding
 
 class MovieListAdapter(
     private val listener: OnMovieClickedListener,
 ) : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
-    private val newMovies = mutableListOf<MovieForList>()
+    private val newMovies = mutableListOf<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -24,7 +24,7 @@ class MovieListAdapter(
 
     class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: MovieForList, listener: OnMovieClickedListener) {
+        fun bind(movie: Movie, listener: OnMovieClickedListener) {
             binding.apply {
                 movieNameMovieListTv.text = movie.title
 
@@ -39,7 +39,7 @@ class MovieListAdapter(
         }
     }
 
-    fun updateMovieList(movies: List<MovieForList>) {
+    fun updateMovieList(movies: List<Movie>) {
         newMovies.clear()
         newMovies.addAll(movies)
         notifyDataSetChanged()

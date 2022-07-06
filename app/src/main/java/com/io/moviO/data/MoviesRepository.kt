@@ -2,14 +2,13 @@ package com.io.moviO.data
 
 import com.io.moviO.data.modelMovie.Movie
 import com.io.moviO.data.modelMovie.MovieByIdResources
-import com.io.moviO.data.modelMovieList.MovieForList
 import com.io.moviO.network.RetrofitInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 object MoviesRepository {
 
-    suspend fun getMovies(): List<MovieForList> =
+    suspend fun getMovies(): List<Movie> =
         withContext(Dispatchers.IO) {
             RetrofitInstance.api.getMovies().toDomain()
         }
@@ -31,10 +30,10 @@ private fun MovieByIdResources.toDomain(): Movie = Movie(
 )
 
 
-private fun MoviesListResources.toDomain(): List<MovieForList> {
-    val movies = mutableListOf<MovieForList>()
+private fun MoviesListResources.toDomain(): List<Movie> {
+    val movies = mutableListOf<Movie>()
     for (movie in this.moviesResources) {
-        movies.add(MovieForList(movie.id, movie.title, movie.posterPath))
+        movies.add(Movie(movie.id, movie.title, movie.posterPath, null, null, null, null))
     }
     return movies
 }

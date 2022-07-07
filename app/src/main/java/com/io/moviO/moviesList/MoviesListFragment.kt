@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.io.moviO.R
 import com.io.moviO.databinding.FragmentMoviesListBinding
 import com.io.moviO.domain.DataResult
-import com.io.moviO.movieDetails.MovieDetailsFragment
 
 class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
     MovieListAdapter.OnMovieClickedListener {
@@ -41,11 +41,6 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
     ) = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
 
-    override fun onItemClicked(id: Int) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, MovieDetailsFragment.newInstance(id))
-            .addToBackStack(this::class.java.name)
-            .commit()
-    }
-
+    override fun onItemClicked(id: Int) = Navigation.findNavController(binding.root)
+        .navigate(MoviesListFragmentDirections.actionListToDetails(id))
 }

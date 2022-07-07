@@ -14,4 +14,9 @@ data class Movie(
     @SerializedName("vote_average")
     val voteAverage: Double? = null,
     val overview: String? = null
-)
+) {
+    data class Genre(
+        val id: Int,
+        val name: String
+    )
+}

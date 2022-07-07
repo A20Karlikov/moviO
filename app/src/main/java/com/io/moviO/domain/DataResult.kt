@@ -1,4 +1,4 @@
-package com.io.moviO.data
+package com.io.moviO.domain
 
 sealed class DataResult<out R> {
 

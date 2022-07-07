@@ -1,4 +1,4 @@
-package com.io.moviO.data.modelMovie
+package com.io.moviO.data
 
 import com.google.gson.annotations.SerializedName
 
@@ -6,10 +6,8 @@ data class MovieByIdResources(
     val adult: Boolean,
     @SerializedName("backdrop_path")
     val backdropPath: String?,
-    @SerializedName("belongs_to_collection")
-    val belongsToCollection: Nothing? = null,
     val budget: Int,
-    val genres: List<Genres>,
+    val genres: List<Genre>,
     val homepage: String?,
     val id: Int,
     @SerializedName("imdb_id")
@@ -19,19 +17,13 @@ data class MovieByIdResources(
     @SerializedName("original_title")
     val originalTitle: String,
     val overview: String?,
-    val popularity: Number,
+    val popularity: Double,
     @SerializedName("poster_path")
     val posterPath: String?,
-    @SerializedName("production_companies")
-    val productionCompanies: List<Any>,
-    @SerializedName("production_countries")
-    val productionCountries: List<Any>,
     @SerializedName("release_date")
     val releaseDate: String,
     val revenue: String,
     val runtime: Int?,
-    @SerializedName("spoken_languages")
-    val spokenLanguages: List<Any>,
     val status: String,
     val tagline: String?,
     val title: String,
@@ -40,4 +32,9 @@ data class MovieByIdResources(
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int
-)
+) {
+    data class Genre(
+        val id: Int,
+        val name: String
+    )
+}

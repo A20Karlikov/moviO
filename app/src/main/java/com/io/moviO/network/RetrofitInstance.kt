@@ -1,5 +1,6 @@
 package com.io.moviO.network
 
+import com.io.moviO.data.MoviesAPI
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -8,15 +9,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-    private const val BASE_URL = "https://api.themoviedb.org"
+    private const val BASE_URL = "https://api.themoviedb.org/3/"
 
     private val client = OkHttpClient.Builder()
-        .addInterceptor(run {
-            val httpLoggingInterceptor = HttpLoggingInterceptor()
-            httpLoggingInterceptor.apply {
-                httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        .addInterceptor(
+            HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
             }
-        })
+        )
         .build()
 
     private val retrofit by lazy {

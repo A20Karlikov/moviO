@@ -1,8 +1,6 @@
 package com.io.moviO.domain
 
-import com.io.moviO.data.DataResult
 import com.io.moviO.data.MoviesRepository
-import com.io.moviO.data.modelMovie.Movie
 
 class GetMoviesUseCase(private val movieRepo: MoviesRepository = MoviesRepository) :
     UseCase<Unit, DataResult<List<Movie>>> {

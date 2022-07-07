@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.io.moviO.common.Constants
-import com.io.moviO.data.modelMovie.Movie
 import com.io.moviO.databinding.ListItemBinding
+import com.io.moviO.domain.Movie
 
 class MovieListAdapter(
     private val listener: OnMovieClickedListener,
@@ -29,7 +28,7 @@ class MovieListAdapter(
                 movieNameMovieListTv.text = movie.title
 
                 Glide.with(this.root)
-                    .load("${Constants.IMAGE_URL_START_PART}${movie.imageUrl}")
+                    .load(movie.imageUrl)
                     .into(moviePosterMovieListIv)
 
                 root.setOnClickListener {

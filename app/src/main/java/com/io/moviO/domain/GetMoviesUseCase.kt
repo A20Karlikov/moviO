@@ -1,7 +1,5 @@
 package com.io.moviO.domain
 
-import com.io.moviO.data.DataResult
-import com.io.moviO.data.Movie
 import com.io.moviO.data.MoviesRepository
 
 class GetMoviesUseCase(private val movieRepo: MoviesRepository = MoviesRepository) :
@@ -9,8 +7,7 @@ class GetMoviesUseCase(private val movieRepo: MoviesRepository = MoviesRepositor
 
     override suspend fun execute(param: Unit): DataResult<List<Movie>> {
         return try {
-            val movies = movieRepo.getMovies()
-            DataResult.Success(movies)
+            DataResult.Success(movieRepo.getMovies())
         } catch (ex: Exception) {
             DataResult.Fail(ex)
         }

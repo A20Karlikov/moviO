@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.io.moviO.R
-import com.io.moviO.data.DataResult
 import com.io.moviO.databinding.FragmentMoviesListBinding
+import com.io.moviO.domain.DataResult
 import com.io.moviO.movieDetails.MovieDetailsFragment
 
 class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
@@ -31,7 +31,6 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
                 ).show()
             }
         }
-
         binding = FragmentMoviesListBinding.bind(view)
         binding.moviesListRv.adapter = apadter
     }
@@ -42,7 +41,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
     ) = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
 
-    override fun onItemClicked(id: String) {
+    override fun onItemClicked(id: Int) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, MovieDetailsFragment.newInstance(id))
             .addToBackStack(this::class.java.name)

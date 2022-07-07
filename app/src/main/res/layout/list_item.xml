@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="40dp">
 
     <ImageView
         android:id="@+id/movie_poster_movie_list_iv"
@@ -23,7 +23,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="3"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

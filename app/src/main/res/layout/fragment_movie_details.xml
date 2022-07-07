@@ -24,7 +24,7 @@
         tools:text="Move name" />
 
     <TextView
-        android:id="@+id/year_label"
+        android:id="@+id/release_date_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -36,14 +36,14 @@
         app:layout_constraintTop_toBottomOf="@+id/movie_name" />
 
     <TextView
-        android:id="@+id/movie_year"
+        android:id="@+id/movie_release_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:textSize="@dimen/text_normal_size"
         app:layout_constraintEnd_toStartOf="@id/movie_poster"
-        app:layout_constraintTop_toBottomOf="@id/year_label"
+        app:layout_constraintTop_toBottomOf="@id/release_date_label"
         tools:text="2000" />
 
     <TextView
@@ -54,24 +54,27 @@
         android:layout_marginEnd="16dp"
         android:textSize="@dimen/text_normal_size"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/movie_year"
+        app:layout_constraintTop_toBottomOf="@id/movie_release_date"
         app:layout_constraintEnd_toStartOf="@id/movie_poster"
         android:text="@string/genre_text"/>
 
     <TextView
         android:id="@+id/movie_genre"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="24dp"
         android:textSize="@dimen/text_normal_size"
+        android:maxLines="2"
         android:textAlignment="viewEnd"
         app:layout_constraintEnd_toStartOf="@id/movie_poster"
         app:layout_constraintTop_toBottomOf="@id/genre_label"
+        app:layout_constraintStart_toStartOf="parent"
         tools:text="Drama"/>
 
     <TextView
-        android:id="@+id/cast_label"
+        android:id="@+id/rating_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -83,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/movie_genre" />
 
     <TextView
-        android:id="@+id/movie_cast"
+        android:id="@+id/movie_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -91,8 +94,8 @@
         android:textAlignment="viewEnd"
         android:textSize="@dimen/text_normal_size"
         app:layout_constraintEnd_toStartOf="@id/movie_poster"
-        app:layout_constraintTop_toBottomOf="@id/cast_label"
-        tools:text="Denzel Washington" />
+        app:layout_constraintTop_toBottomOf="@id/rating_label"
+        tools:text="8.4" />
 
     <ImageView
         android:id="@+id/movie_poster"

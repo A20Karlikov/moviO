@@ -1,16 +1,14 @@
 package com.io.moviO.domain
 
-import com.io.moviO.data.DataResult
-import com.io.moviO.data.Movie
 import com.io.moviO.data.MoviesRepository
 
-class GetMovieByIdUseCase : UseCase<String, DataResult<Movie>> {
-    private val moviesRepo = MoviesRepository
+class GetMovieByIdUseCase(private val moviesRepo: MoviesRepository = MoviesRepository) :
+    UseCase<Int, DataResult<Movie>> {
 
-    override suspend fun execute(id: String): DataResult<Movie> {
+
+    override suspend fun execute(id: Int): DataResult<Movie> {
         return try {
-            val movie = moviesRepo.getMovies().first { movie -> movie.id == id }
-            DataResult.Success(movie)
+            DataResult.Success(moviesRepo.getMovieById(id))
         } catch (ex: Exception) {
             DataResult.Fail(ex)
         }

@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.io.moviO.data.DataResult
-import com.io.moviO.data.Movie
+import com.io.moviO.domain.DataResult
 import com.io.moviO.domain.GetMoviesUseCase
+import com.io.moviO.domain.Movie
 import kotlinx.coroutines.launch
 
 class MoviesListViewModel : ViewModel() {

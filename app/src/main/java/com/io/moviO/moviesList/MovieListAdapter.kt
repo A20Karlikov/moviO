@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.io.moviO.data.Movie
 import com.io.moviO.databinding.ListItemBinding
+import com.io.moviO.domain.Movie
 
 class MovieListAdapter(
     private val listener: OnMovieClickedListener,
@@ -25,9 +25,11 @@ class MovieListAdapter(
 
         fun bind(movie: Movie, listener: OnMovieClickedListener) {
             binding.apply {
-                movieNameMovieListTv.text = movie.name
+                movieNameMovieListTv.text = movie.title
 
-                Glide.with(this.root).load(movie.poster).into(moviePosterMovieListIv)
+                Glide.with(this.root)
+                    .load(movie.imageUrl)
+                    .into(moviePosterMovieListIv)
 
                 root.setOnClickListener {
                     listener.onItemClicked(movie.id)
@@ -43,6 +45,6 @@ class MovieListAdapter(
     }
 
     interface OnMovieClickedListener {
-        fun onItemClicked(id: String)
+        fun onItemClicked(id: Int)
     }
 }

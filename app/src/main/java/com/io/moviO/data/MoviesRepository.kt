@@ -3,12 +3,20 @@ package com.io.moviO.data
 import com.io.moviO.common.Constants
 import com.io.moviO.domain.Movie
 import com.io.moviO.network.RetrofitInstance
+import kotlinx.coroutines.delay
 
 object MoviesRepository {
 
     suspend fun getMovies(): List<Movie> = RetrofitInstance.api.getMovies().toDomain()
 
     suspend fun getMovieById(id: Int): Movie = RetrofitInstance.api.getMovieById(id).toDomain()
+
+    suspend fun searchMovie(query: String): List<Movie> {
+        delay(3000)
+        return RetrofitInstance.api.searchMovie(query).toDomain()
+    }
+
+    suspend fun latestMovies(): List<Movie> = RetrofitInstance.api.latestMovies().toDomain()
 }
 
 private fun MovieByIdResources.toDomain(): Movie = Movie(

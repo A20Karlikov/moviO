@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/moviesListFragment">
+    app:startDestination="@id/searchMovieFragment">
 
     <fragment
         android:id="@+id/moviesListFragment"
@@ -21,5 +22,16 @@
         <argument
             android:name="movie_id"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchMovieFragment"
+        android:name="com.io.moviO.searchMovie.SearchMovieFragment"
+        android:label="fragment_search_movie"
+        tools:layout="@layout/fragment_search_movie">
+        <action
+            android:id="@+id/action_search_to_details"
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@animator/nav_default_pop_enter_anim"
+            app:exitAnim="@animator/nav_default_pop_exit_anim" />
     </fragment>
 </navigation>

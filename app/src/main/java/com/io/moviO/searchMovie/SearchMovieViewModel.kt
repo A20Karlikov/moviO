@@ -31,5 +31,9 @@ class SearchMovieViewModel : ViewModel() {
         }
     }
 
-
+//    sealed class ViewState {
+//        data class Success(val movies: LiveData<List<Movie>>) : ViewState()
+//        data class Fail(val exception: Exception) : ViewState()
+//        object Loading: ViewState()
+//    }
 }

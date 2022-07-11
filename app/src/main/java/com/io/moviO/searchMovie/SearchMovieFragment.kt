@@ -35,10 +35,11 @@ class SearchMovieFragment : Fragment(R.layout.fragment_search_movie),
                 viewModel.searchMovie(it.toString())
             }
             if (it.toString().length > 3) {
+                timer.cancel()
                 binding.searchMovieRv.visibility = View.INVISIBLE
                 binding.progressBar.visibility = View.VISIBLE
-                timer.cancel()
-                Timer().schedule(3000) {
+                timer = Timer()
+                timer.schedule(3000) {
                     if (it.toString().isEmpty()) {
                         viewModel.getLatestMovies()
                     } else {

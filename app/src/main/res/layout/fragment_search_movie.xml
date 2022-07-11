@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".searchMovie.SearchMovieFragment">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/search_movie_et"
         android:layout_width="match_parent"
@@ -18,6 +28,7 @@
         android:hint="@string/search_movie_hint"
         android:inputType="text"
         android:text=""
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toStartOf="@+id/search_movie_rv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -13,10 +13,13 @@ import com.io.moviO.R
 import com.io.moviO.databinding.FragmentSearchMovieBinding
 import com.io.moviO.domain.DataResult
 import com.io.moviO.moviesList.MovieListAdapter
+import java.util.*
+import kotlin.concurrent.schedule
 
 class SearchMovieFragment : Fragment(R.layout.fragment_search_movie),
     MovieListAdapter.OnMovieClickedListener {
     private lateinit var binding: FragmentSearchMovieBinding
+    private var timer = Timer()
     val viewModel: SearchMovieViewModel by lazy { ViewModelProvider(this).get(SearchMovieViewModel::class.java) }
     private var adapter = MovieListAdapter(this)
 
@@ -24,22 +27,35 @@ class SearchMovieFragment : Fragment(R.layout.fragment_search_movie),
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchMovieBinding.bind(view)
 
-        // viewModel.getLatestMovies()
-
         binding.searchMovieEt.doAfterTextChanged {
-            if (it != null) {
-                if (it.length > 2) {
-                    viewModel.searchMovie(it.toString())
-                }
-            }
-            if (it?.isEmpty() == true) {
+            if (it.toString().isEmpty()) {
                 viewModel.getLatestMovies()
+            }
+            if (it.toString().length == 3) {
+                viewModel.searchMovie(it.toString())
+            }
+            if (it.toString().length > 3) {
+                binding.searchMovieRv.visibility = View.INVISIBLE
+                binding.progressBar.visibility = View.VISIBLE
+                timer.cancel()
+                Timer().schedule(3000) {
+                    if (it.toString().isEmpty()) {
+                        viewModel.getLatestMovies()
+                    } else {
+                        viewModel.searchMovie(it.toString())
+                    }
+                }
             }
         }
 
+
         viewModel.movies.observe(viewLifecycleOwner) {
             when (it) {
-                is DataResult.Success -> adapter.updateMovieList(it.value)
+                is DataResult.Success -> {
+                    binding.progressBar.visibility = View.INVISIBLE
+                    binding.searchMovieRv.visibility = View.VISIBLE
+                    adapter.updateMovieList(it.value)
+                }
                 is DataResult.Fail -> Toast.makeText(
                     this.context,
                     R.string.error_message,

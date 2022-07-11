@@ -30,4 +30,6 @@ class SearchMovieViewModel : ViewModel() {
             _movies.value = result
         }
     }
+
+
 }

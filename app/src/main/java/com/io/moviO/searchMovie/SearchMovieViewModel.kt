@@ -23,9 +23,7 @@ class SearchMovieViewModel : ViewModel() {
     }
 
     fun searchMovie(query: String) {
-        if (lastSearch == query) {
-            return
-        }
+        if (lastSearch == query) return
 
         lastSearch = query
         viewModelScope.launch {
@@ -47,6 +45,7 @@ class SearchMovieViewModel : ViewModel() {
 
     fun getLatestMovies() {
         viewModelScope.launch {
+            lastSearch = ""
             _movies.value = ViewState.Loading(true)
             when (val result = GetLatestMoviesUseCase().execute(Unit)) {
                 is DataResult.Success -> {

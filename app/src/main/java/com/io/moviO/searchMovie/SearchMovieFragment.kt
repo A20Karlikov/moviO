@@ -11,10 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.io.moviO.R
 import com.io.moviO.databinding.FragmentSearchMovieBinding
-import com.io.moviO.domain.DataResult
 import com.io.moviO.moviesList.MovieListAdapter
 import java.util.*
 import kotlin.concurrent.schedule
+
+private const val QUERY_SEARCH_MIN_CHARS: Int = 2
 
 class SearchMovieFragment : Fragment(R.layout.fragment_search_movie),
     MovieListAdapter.OnMovieClickedListener {
@@ -28,50 +29,51 @@ class SearchMovieFragment : Fragment(R.layout.fragment_search_movie),
         binding = FragmentSearchMovieBinding.bind(view)
 
         binding.searchMovieEt.doAfterTextChanged {
-            if (it.toString().isEmpty()) {
-                viewModel.getLatestMovies()
-            }
-            if (it.toString().length == 3) {
-                viewModel.searchMovie(it.toString())
-            }
-            if (it.toString().length > 3) {
-                timer.cancel()
-                binding.searchMovieRv.visibility = View.INVISIBLE
-                binding.progressBar.visibility = View.VISIBLE
-                timer = Timer()
-                timer.schedule(3000) {
-                    if (it.toString().isEmpty()) {
-                        viewModel.getLatestMovies()
-                    } else {
-                        viewModel.searchMovie(it.toString())
-                    }
+            timer.cancel()
+            timer = Timer()
+            showLoading(true)
+            timer.schedule(2000) {
+                if (it.toString().length < QUERY_SEARCH_MIN_CHARS) {
+                    viewModel.getLatestMovies()
+                } else {
+                    viewModel.searchMovie(it.toString())
                 }
             }
         }
 
-
         viewModel.movies.observe(viewLifecycleOwner) {
             when (it) {
-                is DataResult.Success -> {
-                    binding.progressBar.visibility = View.INVISIBLE
-                    binding.searchMovieRv.visibility = View.VISIBLE
+                is SearchMovieViewModel.ViewState.Loading -> showLoading(true)
+                is SearchMovieViewModel.ViewState.InitialData -> {
+                    binding.searchTextResult.text = getString(R.string.search_text_default_result)
+                    showLoading(false)
                     adapter.updateMovieList(it.value)
+                    binding.searchMovieRv.scrollToPosition(0)
                 }
-                is DataResult.Fail -> Toast.makeText(
-                    this.context,
-                    R.string.error_message,
-                    Toast.LENGTH_LONG
-                ).show()
+                is SearchMovieViewModel.ViewState.QuerySearch -> {
+                    binding.searchTextResult.text = "Results for \"${binding.searchMovieEt.text}\""
+                    showLoading(false)
+                    adapter.updateMovieList(it.value)
+                    binding.searchMovieRv.scrollToPosition(0)
+                }
+                is SearchMovieViewModel.ViewState.NoResults -> {
+                    binding.searchTextResult.text =
+                        "No results for \"${binding.searchMovieEt.text}\""
+                    binding.progressBar.visibility = View.INVISIBLE
+                    binding.searchTextResult.visibility = View.VISIBLE
+                }
+                is SearchMovieViewModel.ViewState.Fail -> {
+                    binding.progressBar.visibility = View.INVISIBLE
+                    Toast.makeText(
+                        this.context,
+                        R.string.error_message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
         binding.searchMovieRv.adapter = adapter
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.getLatestMovies()
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,4 +82,20 @@ class SearchMovieFragment : Fragment(R.layout.fragment_search_movie),
 
     override fun onItemClicked(id: Int) = Navigation.findNavController(binding.root)
         .navigate(SearchMovieFragmentDirections.actionSearchToDetails(id))
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.apply {
+                searchMovieRv.visibility = View.INVISIBLE
+                searchTextResult.visibility = View.INVISIBLE
+                progressBar.visibility = View.VISIBLE
+            }
+        } else {
+            binding.apply {
+                progressBar.visibility = View.INVISIBLE
+                searchMovieRv.visibility = View.VISIBLE
+                searchTextResult.visibility = View.VISIBLE
+            }
+        }
+    }
 }

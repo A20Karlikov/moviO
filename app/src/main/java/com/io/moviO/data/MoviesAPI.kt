@@ -19,7 +19,10 @@ interface MoviesAPI {
     @GET("search/movie?api_key=${Constants.API_KEY}")
     suspend fun searchMovie(@Query("query") query: String): MoviesListResources
 
-    @GET("search/movie?api_key=${Constants.API_KEY}&query=a&primary_release_year=2022")
-    suspend fun latestMovies(): MoviesListResources
+    @GET("search/movie?api_key=${Constants.API_KEY}")
+    suspend fun latestMovies(
+        @Query("query") query: String,
+        @Query("primary_release_year") year: Int?
+    ): MoviesListResources
 
 }

@@ -12,28 +12,58 @@ import kotlinx.coroutines.launch
 
 class SearchMovieViewModel : ViewModel() {
 
-    private var _movies = MutableLiveData<DataResult<List<Movie>>>()
-    val movies: LiveData<DataResult<List<Movie>>> = _movies
+    private var _movies = MutableLiveData<ViewState>()
+    val movies: LiveData<ViewState> = _movies
 
     private val useCase = SearchMovieUseCase()
+    private var lastSearch: String? = null
+
+    init {
+        getLatestMovies()
+    }
 
     fun searchMovie(query: String) {
+        if (lastSearch == query) {
+            return
+        }
+
+        lastSearch = query
         viewModelScope.launch {
-            val result = useCase.execute(query)
-            _movies.value = result
+            _movies.value = ViewState.Loading(true)
+            when (val result = useCase.execute(query)) {
+                is DataResult.Success -> {
+                    if (result.value.isEmpty()) {
+                        _movies.value = ViewState.NoResults
+                    } else {
+                        _movies.value = ViewState.QuerySearch(result.value)
+                    }
+                }
+                is DataResult.Fail -> {
+                    _movies.value = ViewState.Fail(result.exception)
+                }
+            }
         }
     }
 
     fun getLatestMovies() {
         viewModelScope.launch {
-            val result = GetLatestMoviesUseCase().execute(Unit)
-            _movies.value = result
+            _movies.value = ViewState.Loading(true)
+            when (val result = GetLatestMoviesUseCase().execute(Unit)) {
+                is DataResult.Success -> {
+                    _movies.value = ViewState.InitialData(result.value)
+                }
+                is DataResult.Fail -> {
+                    _movies.value = ViewState.Fail(result.exception)
+                }
+            }
         }
     }
 
-//    sealed class ViewState {
-//        data class Success(val movies: LiveData<List<Movie>>) : ViewState()
-//        data class Fail(val exception: Exception) : ViewState()
-//        object Loading: ViewState()
-//    }
+    sealed class ViewState {
+        data class InitialData(val value: List<Movie>) : ViewState()
+        data class QuerySearch(val value: List<Movie>) : ViewState()
+        data class Fail(val exception: Exception) : ViewState()
+        data class Loading(val isLoading: Boolean) : ViewState()
+        object NoResults : ViewState()
+    }
 }

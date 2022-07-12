@@ -6,7 +6,7 @@ data class Movie(
     val id: Int,
     val title: String,
     @SerializedName("poster_path")
-    val imageUrl: String?,
+    var imageUrl: String?,
     @SerializedName("release_date")
     val releaseDate: String? = null,
     @SerializedName("genres")

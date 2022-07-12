@@ -7,6 +7,9 @@
     <string name="genre_text">Genre</string>
     <string name="error_message">Something goes wrong!</string>
     <string name="search_movie_hint">Search here...</string>
+    <string name="search_text_default_result">Results for this year\'s latest releases:</string>
+    <string name="empty_list_genres">---</string>
+    <string name="empty_overview">No description</string>
 
 
 </resources>

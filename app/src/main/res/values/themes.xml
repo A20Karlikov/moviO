@@ -3,7 +3,7 @@
     <style name="Theme.MoviO" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#212122</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimaryVariant">#000000</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#030404</item>

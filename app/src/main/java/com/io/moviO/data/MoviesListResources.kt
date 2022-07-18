@@ -13,7 +13,7 @@ data class MoviesListResources(
 ) {
     data class MovieResources(
         @SerializedName("poster_path")
-        val posterPath: String,
+        val posterPath: String?,
         val adult: Boolean,
         val overview: String,
         @SerializedName("release_date")

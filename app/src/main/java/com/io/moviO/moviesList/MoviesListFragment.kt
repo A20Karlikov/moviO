@@ -16,14 +16,14 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
     MovieListAdapter.OnMovieClickedListener {
     private lateinit var binding: FragmentMoviesListBinding
     val viewModel: MoviesListViewModel by lazy { ViewModelProvider(this).get(MoviesListViewModel::class.java) }
-    private var apadter = MovieListAdapter(this)
+    private var adapter = MovieListAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
         viewModel.movies.observe(viewLifecycleOwner) {
             when (it) {
-                is DataResult.Success -> apadter.updateMovieList(it.value)
+                is DataResult.Success -> adapter.updateMovieList(it.value)
                 is DataResult.Fail -> Toast.makeText(
                     this.context,
                     R.string.error_message,
@@ -32,7 +32,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
             }
         }
         binding = FragmentMoviesListBinding.bind(view)
-        binding.moviesListRv.adapter = apadter
+        binding.moviesListRv.adapter = adapter
     }
 
     override fun onCreateView(
@@ -42,5 +42,5 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
 
 
     override fun onItemClicked(id: Int) = Navigation.findNavController(binding.root)
-        .navigate(MoviesListFragmentDirections.actionListToDetails(id))
+        .navigate(MoviesListFragmentDirections.showDetails(id))
 }

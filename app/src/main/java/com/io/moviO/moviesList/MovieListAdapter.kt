@@ -26,7 +26,6 @@ class MovieListAdapter(
         fun bind(movie: Movie, listener: OnMovieClickedListener) {
             binding.apply {
                 movieNameMovieListTv.text = movie.title
-
                 Glide.with(this.root)
                     .load(movie.imageUrl)
                     .into(moviePosterMovieListIv)

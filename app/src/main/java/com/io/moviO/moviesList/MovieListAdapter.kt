@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.io.moviO.common.Constants
 import com.io.moviO.databinding.ListItemBinding
 import com.io.moviO.domain.Movie
 
@@ -27,10 +26,6 @@ class MovieListAdapter(
         fun bind(movie: Movie, listener: OnMovieClickedListener) {
             binding.apply {
                 movieNameMovieListTv.text = movie.title
-
-                if (movie.imageUrl == Constants.IMAGE_URL_START_PART.plus(null)) {
-                    movie.imageUrl = Constants.NO_IMAGE_URL
-                }
                 Glide.with(this.root)
                     .load(movie.imageUrl)
                     .into(moviePosterMovieListIv)

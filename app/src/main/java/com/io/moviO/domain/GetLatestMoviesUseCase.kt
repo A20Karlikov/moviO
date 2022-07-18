@@ -10,8 +10,7 @@ class GetLatestMoviesUseCase(private val movieRepo: MoviesRepository = MoviesRep
         return try {
             DataResult.Success(
                 movieRepo.latestMovies(
-                    "%20",
-                    Calendar.getInstance().get(Calendar.YEAR)
+                    Unit, Calendar.getInstance().get(Calendar.YEAR)
                 )
             )
         } catch (ex: Exception) {

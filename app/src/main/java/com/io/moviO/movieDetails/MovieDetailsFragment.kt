@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.io.moviO.R
-import com.io.moviO.common.Constants
 import com.io.moviO.databinding.FragmentMovieDetailsBinding
 import com.io.moviO.domain.DataResult
 import com.io.moviO.domain.Movie
@@ -37,15 +36,10 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
                                 movieGenre.text = convertGenres(it.value.genres)
                             }
                             movieRating.text = "${it.value.voteAverage}/10"
-                            if (it.value.overview == null || it.value.overview.toString()
-                                    .isEmpty()
-                            ) {
+                            if (it.value.overview.isNullOrEmpty()) {
                                 overviewText.text = getString(R.string.empty_overview)
                             } else {
                                 overviewText.text = it.value.overview
-                            }
-                            if (it.value.imageUrl == Constants.IMAGE_URL_START_PART.plus(null)) {
-                                it.value.imageUrl = Constants.NO_IMAGE_URL
                             }
                             Glide.with(this@MovieDetailsFragment)
                                 .load(it.value.imageUrl)

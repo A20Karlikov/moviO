@@ -10,6 +10,7 @@
     <string name="search_text_default_result">Results for this year\'s latest releases:</string>
     <string name="empty_list_genres">---</string>
     <string name="empty_overview">No description</string>
+    <string name="label_search_toolbar">Search</string>
 
 
 </resources>

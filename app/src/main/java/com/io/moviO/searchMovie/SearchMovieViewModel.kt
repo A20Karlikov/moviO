@@ -27,7 +27,7 @@ class SearchMovieViewModel : ViewModel() {
 
         lastSearch = query
         viewModelScope.launch {
-            _movies.value = ViewState.Loading(true)
+            _movies.value = ViewState.Loading
             when (val result = useCase.execute(query)) {
                 is DataResult.Success -> {
                     if (result.value.isEmpty()) {
@@ -46,7 +46,7 @@ class SearchMovieViewModel : ViewModel() {
     fun getLatestMovies() {
         viewModelScope.launch {
             lastSearch = ""
-            _movies.value = ViewState.Loading(true)
+            _movies.value = ViewState.Loading
             when (val result = GetLatestMoviesUseCase().execute(Unit)) {
                 is DataResult.Success -> {
                     _movies.value = ViewState.InitialData(result.value)
@@ -62,7 +62,7 @@ class SearchMovieViewModel : ViewModel() {
         data class InitialData(val value: List<Movie>) : ViewState()
         data class QuerySearch(val value: List<Movie>) : ViewState()
         data class Fail(val exception: Exception) : ViewState()
-        data class Loading(val isLoading: Boolean) : ViewState()
+        object Loading : ViewState()
         object NoResults : ViewState()
     }
 }

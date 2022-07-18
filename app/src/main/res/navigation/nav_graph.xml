@@ -10,7 +10,7 @@
         android:name="com.io.moviO.moviesList.MoviesListFragment"
         android:label="MoviesListFragment">
         <action
-            android:id="@+id/action_list_to_details"
+            android:id="@+id/showDetails"
             app:destination="@id/movieDetailsFragment"
             app:enterAnim="@animator/nav_default_pop_enter_anim"
             app:exitAnim="@animator/nav_default_pop_exit_anim" />
@@ -29,7 +29,7 @@
         android:label="fragment_search_movie"
         tools:layout="@layout/fragment_search_movie">
         <action
-            android:id="@+id/action_search_to_details"
+            android:id="@+id/showDetails"
             app:destination="@id/movieDetailsFragment"
             app:enterAnim="@animator/nav_default_pop_enter_anim"
             app:exitAnim="@animator/nav_default_pop_exit_anim" />

@@ -42,5 +42,5 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list),
 
 
     override fun onItemClicked(id: Int) = Navigation.findNavController(binding.root)
-        .navigate(MoviesListFragmentDirections.actionListToDetails(id))
+        .navigate(MoviesListFragmentDirections.showDetails(id))
 }

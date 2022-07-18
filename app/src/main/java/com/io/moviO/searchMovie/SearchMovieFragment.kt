@@ -28,18 +28,6 @@ class SearchMovieFragment : Fragment(R.layout.fragment_search_movie),
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchMovieBinding.bind(view)
         setHasOptionsMenu(true)
-//        binding.searchMovieEt.doAfterTextChanged {
-//            timer.cancel()
-//            timer = Timer()
-//            showLoading(true)
-//            timer.schedule(2000) {
-//                if (it.toString().length < QUERY_SEARCH_MIN_CHARS) {
-//                    viewModel.getLatestMovies()
-//                } else {
-//                    viewModel.searchMovie(it.toString())
-//                }
-//            }
-//        }
 
         viewModel.movies.observe(viewLifecycleOwner) {
             val hasData =
@@ -88,7 +76,6 @@ class SearchMovieFragment : Fragment(R.layout.fragment_search_movie),
                 searchText = query.lowercase(Locale.getDefault())
                 timer.cancel()
                 timer = Timer()
-                //  showLoading(true)
                 timer.schedule(2000) {
                     if (searchText.length < QUERY_SEARCH_MIN_CHARS) {
                         viewModel.getLatestMovies()

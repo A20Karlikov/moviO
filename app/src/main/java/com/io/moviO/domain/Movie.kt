@@ -1,13 +1,12 @@
 package com.io.moviO.domain
 
 import com.google.gson.annotations.SerializedName
-import com.io.moviO.common.Constants
 
 data class Movie(
     val id: Int,
     val title: String,
     @SerializedName("poster_path")
-    val imageUrl: String = Constants.NO_IMAGE_URL,
+    val imageUrl: String,
     @SerializedName("release_date")
     val releaseDate: String? = null,
     @SerializedName("genres")

@@ -30,17 +30,11 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
                         binding.apply {
                             movieName.text = it.value.title
                             movieReleaseDate.text = it.value.releaseDate
-                            if (it.value.genres?.isEmpty() == true) {
-                                movieGenre.text = getString(R.string.empty_list_genres)
-                            } else {
-                                movieGenre.text = convertGenres(it.value.genres)
-                            }
+                            movieGenre.text = it.value.genres?.run { convertGenres(this) }
+                                ?: getString(R.string.empty_list_genres)
                             movieRating.text = "${it.value.voteAverage}/10"
-                            if (it.value.overview.isNullOrEmpty()) {
-                                overviewText.text = getString(R.string.empty_overview)
-                            } else {
-                                overviewText.text = it.value.overview
-                            }
+                            overviewText.text = it.value.overview?.run { it.value.overview }
+                                ?: getString(R.string.empty_overview)
                             Glide.with(this@MovieDetailsFragment)
                                 .load(it.value.imageUrl)
                                 .into(moviePoster)
